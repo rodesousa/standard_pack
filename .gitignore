@@ -1,2 +1,6 @@
 standard*/target
 editor*/target
+target
+project
+*.uml
+.idea
