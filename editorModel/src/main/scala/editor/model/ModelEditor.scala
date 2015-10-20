@@ -1,28 +1,28 @@
 package editor.model
 
 import editor.model.map.MapEditor
-import editor.resource.Resources._
+import editor.model.perso.PersoEditor
+import editor.resource.Resources
 import standard.model.Model
-import standard.model.fight.Fighter
 import standard.model.item.weapon.SimpleSword
-import standard.model.perso.Personnage
-
-import scala.collection.immutable.HashMap
 
 class ModelEditor extends Model {
 
-  def etatMaps: HashMap[String, standard.model.map.Map] = ???
+  //  def etatMaps: HashMap[String, standard.model.map.Map] = ???
+  def etatMaps = ???
 
-  def etatCompagnons: HashMap[String, Personnage] = ???
+  //  def etatCompagnons: HashMap[String, PersoEditor] = ???
+  def etatCompagnons = ???
 
   var currentMap = new MapEditor
-  var currentPerso = new Personnage(PERSONNAGE_NAME) with Fighter {
+
+  var currentPerso = new PersoEditor(Resources.PERSONNAGE_NAME) {
     var str = 10
     var defe = 10
     var agi = 10
+    var arme = new SimpleSword
     hpMax = 100
     vit = 10
-    var arme = new SimpleSword
   }
 
   var list = scala.collection.mutable.Map[Int, Int]()

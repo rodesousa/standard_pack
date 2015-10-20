@@ -1,8 +1,6 @@
 package editor.model.map
 
-import editor.resource.Resources._
+import editor.resource.Resources
 import standard.model.map.Map
-import standard.model.map.cellule.Cellule
 
-class MapEditor extends Map(MAP_NAME){
-}
+class MapEditor extends Map(Resources.MAP_NAME){}

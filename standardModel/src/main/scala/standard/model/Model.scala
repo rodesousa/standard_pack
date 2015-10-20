@@ -1,22 +1,19 @@
 package standard.model
 
-import standard.model.dialogue.Dialogue
-import standard.model.fight.Fighter
-import standard.model.map.Map
 import standard.model.perso.Personnage
-import standard.resource.Variables._
+import standard.resource.Variables
+import standard.model.map.Map
 
-import scala.collection.immutable.HashMap
+import scala.collection.mutable
 
 abstract class Model() {
-  val dialogue = new Dialogue
-  var stateGame = EVENT_NONE
+  var stateGame = Variables.EVENT_NONE
 
-  def etatMaps: HashMap[String, Map]
+  def etatMaps : mutable.HashMap[String, Map]
 
-  def etatCompagnons: HashMap[String, Personnage]
+  def etatCompagnons : mutable.HashMap[String, Personnage]
 
-  def currentMap: Map
+  def currentMap : Map
 
-  def currentPerso: Personnage with Fighter
+  def currentPerso : Personnage
 }

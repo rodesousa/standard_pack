@@ -1,15 +1,8 @@
 package editor.controller
 
-import standard.model.Model
+import editor.model.ModelEditor
+import standard.controller.Controller
 
-abstract class ControllerEditor{
-  def model : Model
-  initGame
-
-  def initGame = ???
-  
-  def move(indication : String) = model.currentPerso canDo(model,indication)
-  
-  //TODO
-  def action() = ???
+class ControllerEditor(_model: ModelEditor) extends Controller(_model) {
+  val model = _model
 }

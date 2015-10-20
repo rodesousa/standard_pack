@@ -1,22 +1,23 @@
 package standard.controller
 
 import standard.model.Model
-import standard.resource.Variables._
+import standard.model.perso.job.Deplaceur
+import standard.resource.Variables
 
 abstract class Controller(_model: Model) {
-  def model = _model
+  def model : Model
 
-  def move(indication: String) = {
-    if (model.stateGame != EVENT_FIGHT)
-      model.stateGame = EVENT_DEPLACEMENT
-    model.currentPerso canDo(model, indication)
+  def move(indication: String, perso : Deplaceur) = {
+    if (_model.stateGame != Variables.EVENT_FIGHT)
+      _model.stateGame = Variables.EVENT_DEPLACEMENT
+    perso canDo(_model, indication)
   }
 
   def fightDone() {
-    model.stateGame = EVENT_NONE
+    _model.stateGame = Variables.EVENT_NONE
   }
 
   def fightBegin() {
-    model.stateGame = EVENT_FIGHT
+    _model.stateGame = Variables.EVENT_FIGHT
   }
 }

@@ -1,11 +1,13 @@
 package standard.view.swing.perso
 
 import standard.model.Model
-import standard.model.perso.Personnage
+import standard.model.perso.job.Deplaceur
 import standard.resource.Variables._
 
-
-class ViewPersoEditor(_perso: Personnage) {
+/**
+ * Created by rodesousa on 20/10/15.
+ */
+class ViewPerso(_perso: Deplaceur) {
   val faceImg1 = _perso.info.folder + "face1.jpg"
   val faceImg2 = _perso.info.folder + "face2.jpg"
   val faceImg3 = _perso.info.folder + "face3.jpg"
@@ -60,4 +62,5 @@ class ViewPersoEditor(_perso: Personnage) {
   }
 
   def perso = _perso
+
 }
