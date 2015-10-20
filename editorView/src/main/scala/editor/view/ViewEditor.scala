@@ -2,17 +2,21 @@ package editor.view
 
 import java.awt.event.{KeyListener, MouseListener}
 import javax.swing.JFrame
+
+import editor.controller.ControllerEditor
 import editor.model.ModelEditor
 import editor.view.panel.PanelEditor
+import standard.view.swing.ViewStandard
 
-class ViewEditor(model: ModelEditor) extends JFrame {
+class ViewEditor(controller: ControllerEditor) extends ViewStandard(controller) {
 
+  val model = controller.model
   var panelPrincipal = new PanelEditor(model)
-  val clavierListenner = new ClavierListenner(this, this.model)
+  val keyboardListener = new ClavierListenner(this, this.model)
 
   //conf panelPrincipal
-  panelPrincipal.addKeyListener(clavierListenner)
-  panelPrincipal.addMouseListener(clavierListenner)
+  panelPrincipal.addKeyListener(keyboardListener)
+  panelPrincipal.addMouseListener(keyboardListener)
   panelPrincipal.setFocusable(true)
 
   //Option de la fenetre

@@ -1,20 +1,27 @@
-package standard.model.fonction.action.deplacement
+package standard.model.perso.job
 
 import java.awt.Point
 
 import standard.model.Model
-import standard.model.fonction.action.Action
-import standard.resource.Variables._
+import standard.model.fonction.action.deplacement.Mobilite
+import standard.model.perso.Personnage
+import standard.resource.Variables
 
 import scala.annotation.tailrec
 
-trait Deplacement extends Action with Mobilite {
+/**
+ * Created by rodesousa on 20/10/15.
+ */
+
+abstract class Deplaceur(_nomFichier: String) extends Personnage(_nomFichier) with Mobilite {
+  val pas = info.nbrPas
+
   def canDo(model: Model, direction: String) {
     direction match {
-      case DIRECTION_LEFT => if (tryHorizontale(model, -1)) toDoHorizontale(-1, direction);
-      case DIRECTION_RIGHT => if (tryHorizontale(model, 1)) toDoHorizontale(1, direction)
-      case DIRECTION_UP => if (tryVerticale(model, -1)) toDoVerticale(-1, direction)
-      case DIRECTION_DOWN => if (tryVerticale(model, 1)) toDoVerticale(1, direction)
+      case Variables.DIRECTION_LEFT => if (tryHorizontale(model, -1)) toDoHorizontale(-1, direction);
+      case Variables.DIRECTION_RIGHT => if (tryHorizontale(model, 1)) toDoHorizontale(1, direction)
+      case Variables.DIRECTION_UP => if (tryVerticale(model, -1)) toDoVerticale(-1, direction)
+      case Variables.DIRECTION_DOWN => if (tryVerticale(model, 1)) toDoVerticale(1, direction)
     }
   }
 
@@ -26,7 +33,7 @@ trait Deplacement extends Action with Mobilite {
         case _ => false;
       }
     }
-    itrZoneWalking(model.currentMap.zoneWalking)
+    itrZoneWalking(model.currentMap.walkPossible)
   }
 
   private def tryVerticale(model: Model, indice: Int): Boolean = {
@@ -37,7 +44,7 @@ trait Deplacement extends Action with Mobilite {
         case _ => false;
       }
     }
-    itrZoneWalking(model.currentMap.zoneWalking)
+    itrZoneWalking(model.currentMap.walkPossible)
   }
 
   private def toDoHorizontale(indice: Int, direction: String) {
@@ -51,4 +58,5 @@ trait Deplacement extends Action with Mobilite {
       y += (pas * indice)
     directionCurrent = direction
   }
+
 }

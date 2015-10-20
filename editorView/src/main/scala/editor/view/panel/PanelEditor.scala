@@ -5,12 +5,14 @@ import java.io.File
 import javax.imageio.ImageIO
 import javax.swing.JPanel
 
-import standard.view.swing.perso.ViewPersoEditor
 import editor.model.ModelEditor
+import standard.view.swing.perso.ViewPerso
 
-class PanelEditor(model: ModelEditor) extends JPanel {
+class PanelEditor(_model: ModelEditor) extends JPanel {
 
-  var viewPerso = new ViewPersoEditor(model.currentPerso)
+  val model = _model
+
+  var viewPerso = new ViewPerso(model.currentPerso)
 
   override def paintComponent(g: Graphics) {
     viewPerso.nextImg(model)
