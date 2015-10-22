@@ -7,6 +7,6 @@ import standard.model.perso.job.Deplaceur
  * Created by rodesousa on 20/10/15.
  */
 
-abstract class PersoEditor(_nomFichier : String) extends Deplaceur(_nomFichier) with Fighter{
+abstract class PersoEditor(_nomFichier: String) extends Deplaceur(_nomFichier) with Fighter {
 
 }

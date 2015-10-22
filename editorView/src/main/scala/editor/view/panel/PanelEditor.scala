@@ -16,7 +16,6 @@ class PanelEditor(_model: ModelEditor) extends JPanel {
 
   override def paintComponent(g: Graphics) {
     viewPerso.nextImg(model)
-
     g.drawImage(ImageIO.read(new File(model.currentMap.img)), 0, 0, this)
     g.drawImage(ImageIO.read(new File(viewPerso.currentDirectionEtape)), viewPerso.perso.x, viewPerso.perso.y,
       this)

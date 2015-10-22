@@ -1,63 +1,24 @@
 package editor.view
 
-import java.awt.event.{KeyListener, MouseListener}
-import javax.swing.JFrame
-
 import editor.controller.ControllerEditor
-import editor.model.ModelEditor
+import editor.view.listener.ListenerEditor
 import editor.view.panel.PanelEditor
-import standard.view.swing.ViewStandard
+import standard.view.swing.View
+import standard.view.swing.fight.InfoFIght
+import standard.view.swing.panel.{PanelFight, PanelHome}
 
-class ViewEditor(controller: ControllerEditor) extends ViewStandard(controller) {
-
+class ViewEditor(_controller: ControllerEditor) extends View(_controller) {
+  val controller = _controller
   val model = controller.model
-  var panelPrincipal = new PanelEditor(model)
-  val keyboardListener = new ClavierListenner(this, this.model)
+  var panelGame = new PanelEditor(model)
+  val keyboardListener = new ListenerEditor(this)
+  val keyboardFightListener = null
+  val viewFight = new InfoFIght(model.modelFight)
+  val panelFight = new PanelFight(viewFight)
+  val panelHome = new PanelHome
+  this.init()
 
-  //conf panelPrincipal
-  panelPrincipal.addKeyListener(keyboardListener)
-  panelPrincipal.addMouseListener(keyboardListener)
-  panelPrincipal.setFocusable(true)
+  def initFight: Unit = ???
 
-  //Option de la fenetre
-  this.setTitle("TestJeuxEditor")
-  this.setSize(800, 600)
-  this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
-  this.setContentPane(panelPrincipal)
-  this.setVisible(true)
-}
-
-class ClavierListenner(view: ViewEditor, model: ModelEditor) extends KeyListener with MouseListener {
-
-  import java.awt.event.{KeyEvent, MouseEvent}
-
-  def keyPressed(e: KeyEvent) {
-    if (e.getKeyCode == KeyEvent.VK_RIGHT || e.getKeyCode == KeyEvent.VK_LEFT ||
-      e.getKeyCode == KeyEvent.VK_UP || e.getKeyCode == KeyEvent.VK_DOWN) {
-      model.currentPerso canDo(model, e.getKeyCode.toString)
-    }
-    else if (e.getKeyCode == KeyEvent.VK_C) {
-      model.setListToZoneWalking
-    }
-    else if (e.getKeyCode == KeyEvent.VK_X) {
-      model.writeZoneWalkingMap
-    }
-    else if (e.getKeyCode == KeyEvent.VK_W) {
-    }
-    view.panelPrincipal.updateUI()
-  }
-
-  def keyReleased(x$1: KeyEvent): Unit = {}
-
-  def keyTyped(x$1: KeyEvent): Unit = {}
-
-  def mouseClicked(x$1: MouseEvent) {}
-
-  def mouseEntered(x$1: MouseEvent) {}
-
-  def mouseExited(x$1: MouseEvent) {}
-
-  def mousePressed(x$1: MouseEvent) {}
-
-  def mouseReleased(x$1: MouseEvent) {}
+  def deleteFight: Unit = ???
 }

@@ -1,14 +1,10 @@
 package standard.view.swing.panel
 
-import java.awt.{Font, Color, Graphics}
-import javax.swing.JPanel
-
-import standard.model.Model
-import standard.model.dialogue.Dialogue
+import standard.view.swing.fight.InfoFIght
 
 /**
  * * Created by rds on 16/05/15.
  */
-class PanelFight(model : Model) extends JPanel{
+class PanelFight(view: InfoFIght) extends PanelHome {
 
 }

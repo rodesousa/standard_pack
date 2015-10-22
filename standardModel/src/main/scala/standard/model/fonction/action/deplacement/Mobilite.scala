@@ -1,6 +1,6 @@
 package standard.model.fonction.action.deplacement
 
-import standard.resource.Variables._
+import standard.resources.Variables._
 
 /**
  * *  Created by rds on 09/05/15.

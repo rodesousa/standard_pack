@@ -5,6 +5,6 @@ package standard.model.event
  */
 
 
-trait EventAction {
+abstract class EventAction {
   def list : List[Int]
 }

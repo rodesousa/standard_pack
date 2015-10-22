@@ -1,8 +1,8 @@
 package standard.view.swing.perso
 
-import standard.model.Model
+import standard.model.model.Model
 import standard.model.perso.job.Deplaceur
-import standard.resource.Variables._
+import standard.resources.Variables._
 
 /**
  * Created by rodesousa on 20/10/15.

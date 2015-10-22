@@ -1,6 +1,6 @@
 package standard.view.swing.model
 
-import standard.model.Model
+import standard.model.model.Model
 
 /**
  * Created by rodesousa on 20/10/15.

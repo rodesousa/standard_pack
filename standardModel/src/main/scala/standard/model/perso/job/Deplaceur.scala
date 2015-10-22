@@ -1,11 +1,10 @@
 package standard.model.perso.job
 
 import java.awt.Point
-
-import standard.model.Model
 import standard.model.fonction.action.deplacement.Mobilite
+import standard.model.model.Model
 import standard.model.perso.Personnage
-import standard.resource.Variables
+import standard.resources.Variables
 
 import scala.annotation.tailrec
 
