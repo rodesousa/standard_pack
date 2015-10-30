@@ -20,4 +20,5 @@ abstract class Model() {
   def currentPerso: Deplaceur
 
   def modelFight: ModelFight
+
 }

@@ -1,7 +1,7 @@
 package warrior.launcher
 
-import  standard.view.swing.warrior.ViewWarrior
 import controller.warrior.ControllerWarrior
+import view.swing.warrior.ViewWarrior
 import warrior.example.Persos
 import warrior.model.ModelWarrior
 

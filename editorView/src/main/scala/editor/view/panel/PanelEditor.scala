@@ -6,7 +6,7 @@ import javax.imageio.ImageIO
 import javax.swing.JPanel
 
 import editor.model.ModelEditor
-import standard.view.swing.perso.ViewPerso
+import view.swing.standard.perso.ViewPerso
 
 class PanelEditor(_model: ModelEditor) extends JPanel {
 

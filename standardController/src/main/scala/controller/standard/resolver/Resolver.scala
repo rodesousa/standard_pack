@@ -11,9 +11,9 @@ import warrior.perso.CharacterFighter
 abstract class Resolver {
 
   def resolveEvent(controller: Controller): String =
-    controller.pipeEvent.haveEvent.event.current match {
-      case e: EventDialogue => println(s"${e} DIAL "); resolveDialogue(e)
-      case e: EventFight => println(s"${e} FIGHT "); resolveFight(controller)
+    controller.pipeEvent.events.current match {
+      case e: EventDialogue => resolveDialogue(e)
+      case e: EventFight => resolveFight(controller)
     }
 
   //resouds les fights
@@ -26,7 +26,7 @@ abstract class Resolver {
   def resolveDialogue(e: EventDialogue) = EVENT_DIALOGUE
 
   def initControllerFight(controller: Controller) {
-    val defenser = controller.pipeEvent.haveEvent match {
+    val defenser = controller.pipeEvent.events match {
       case e: CharacterFighter => e
     }
 

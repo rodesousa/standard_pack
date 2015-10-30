@@ -21,8 +21,7 @@ trait Technique extends FightStyle {
 
   def maxDan: dan
 
-  //  def listAtk: List[(Boolean, ActionFight)]
-  def listAtk: List[(Boolean, ActionFight)]
+  def listAtk: List[ActionFight]
 
   def bonusMalus(warriorWeapon: WarriorWeapon): Int
 }

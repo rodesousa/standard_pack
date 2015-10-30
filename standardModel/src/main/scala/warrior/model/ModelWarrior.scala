@@ -12,7 +12,7 @@ import warrior.map.MapWarrior
 class ModelWarrior extends Model {
   var currentMap = new MapWarrior(Variables.MAP_NAME)
   var currentPerso = Persos.createPersoPri
-  var modelFight : ModelFightWarrior = null
+  var modelFight: ModelFightWarrior = null
 
   def etatMaps = null
 

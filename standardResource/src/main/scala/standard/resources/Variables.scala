@@ -31,6 +31,6 @@ object Variables {
   val MAP_NAME = "standardResource/src/main/resources/standard/resources/map/map"
   val MAP_FIGHT = "fight.jpg"
   val BEGIN = "begin"
-  val CURSEUR_FIGHT_PATH = "menu.jpg"
-  val NOIR = "test.jpg"
+  val CURSEUR_FIGHT = "menu.jpg"
+  val BLACK = "test.jpg"
 }

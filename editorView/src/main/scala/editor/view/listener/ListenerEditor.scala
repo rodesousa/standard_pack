@@ -3,7 +3,7 @@ package editor.view.listener
 import java.awt.event.KeyEvent
 
 import editor.view.ViewEditor
-import standard.view.swing.listener.Listener
+import view.swing.standard.listener.Listener
 
 /**
  * Created by rodesousa on 21/10/15.

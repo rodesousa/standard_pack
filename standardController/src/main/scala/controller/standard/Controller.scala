@@ -8,6 +8,7 @@ import standard.model.perso.job.Deplaceur
 import standard.resources.Variables
 
 abstract class Controller(_model: Model) {
+
   def model: Model
 
   def pipeEvent: StructEvent
@@ -22,11 +23,20 @@ abstract class Controller(_model: Model) {
     perso canDo(_model, indication)
   }
 
-  def fightDone() {
+  def eventDone() {
     _model.stateGame = Variables.EVENT_NONE
   }
 
   def fightBegin() {
     _model.stateGame = Variables.EVENT_FIGHT
   }
+
+  def fightIsItDone(): Boolean = {
+    model.stateGame == Variables.EVENT_FIGHT_DONE
+  }
+
+  def fightDone(){
+    model.stateGame = Variables.EVENT_FIGHT_DONE
+  }
+
 }

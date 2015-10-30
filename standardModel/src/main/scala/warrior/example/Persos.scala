@@ -1,10 +1,10 @@
 package warrior.example
 
-import standard.model.event.action.{EventDialogue, EventFight}
-import standard.model.event.{Event, EventAction, HaveEvent}
+import standard.model.event.HaveEvent
+import standard.model.event.action.{EventDeplacement, EventDialogue, EventFight}
 import standard.model.map.cellule.Cellule
+import standard.model.model.Model
 import standard.resources.Variables._
-import warrior.fight.technique.action.ActionFight
 import warrior.fight.technique.impl.{HittenMitsurugiRyu, SwordBase}
 import warrior.item.weapon.sword.SwordStandard
 import warrior.model.ModelWarrior
@@ -21,41 +21,51 @@ object Persos {
       var str = 5
       var defe = 5
       var agi = 5
-      hpMax = 50
-      vit = 5
+      var hpMax = 50
+      var vit = 5
+      hpCurrent = hpMax
+
       val base: SwordBase = new SwordBase {
-        val listAtk = (true, atack) :: Nil
+        val listAtk = atack :: Nil
       }
-      var techniquesCombat = base :: Nil
+      var listTechnique = base :: Nil
       var arme = new SwordStandard
     }
     createPersoPri :: p2 :: Nil
   }
 
   def createPersoPri = {
+
     new CharacterFighter(PERSONNAGE_NAME) {
       info.name = "Kenshin"
       var str = 10
       var defe = 10
       var agi = 10
-      hpMax = 100
-      vit = 10
+      var vit = 10
+      var hpMax = 50
+      hpCurrent = hpMax
+
       val ryu = new HittenMitsurugiRyu {
-        val listAtk: List[(Boolean, ActionFight)] = (true, dragonDivin) :: Nil
+        val listAtk = dragonDivin :: Nil
       }
+
       val base: SwordBase = new SwordBase {
-        val listAtk = (true, atack) :: Nil
+        val listAtk = atack :: Nil
       }
-      var techniquesCombat = ryu :: base :: Nil
+
+      var listTechnique = ryu :: base :: Nil
+
       var arme = new SwordStandard
     }
   }
 
   def PnjTOEvent(model: ModelWarrior) {
     val pnj = createPNJ
-    val cellule = new Cellule(510, 75) {
+
+    val cellule = new Cellule(0, 0) {
       event = pnj
     }
+
     model.currentMap.cellules = cellule :: model.currentMap.cellules
   }
 
@@ -65,29 +75,64 @@ object Persos {
       var str = 5
       var defe = 5
       var agi = 5
-      hpMax = 50
-      vit = 5
+      var hpMax = 50
+      var vit = 5
       hpCurrent = hpMax
+
       val base: SwordBase = new SwordBase {
-        val listAtk = (true, atack) :: Nil
+        val listAtk = atack :: Nil
       }
-      var techniquesCombat = base :: Nil
+
+      var listTechnique = base :: Nil
       var arme = new SwordStandard
-      event = new Event {
 
-        var current: EventAction = new EventDialogue {
-          var subject = "Bastien la fiotte"
-          var text = "Halte la PD ! Combattons comme de jeune pucelle !"
-          val list = listDialogue
+      val deplacement = new EventDeplacement {
+        val list = listDeplacement
+
+        def eventDone(model: Model): Boolean = true
+      }
+
+      val dialogueFin = new EventDialogue {
+        var subject = "Bastien la fiotte"
+        var text = "Bo GOSSE"
+        val list = listDialogue
+
+        def eventDone(model: Model): Boolean = {
+          println("FCO")
+          true
+        }
+      }
+
+      val haveEvent = new HaveEvent {
+        current = dialogueFin
+        next = new HaveEvent {
+          current = deplacement
+          next = null
+        }
+      }
+
+      haveEvent.next.next = haveEvent
+
+      current = new EventDialogue {
+        var subject = "Bastien la fiotte"
+        var text = "Halte la PD ! Combattons comme de jeune pucelle !"
+        val list = listDialogue
+
+        def eventDone(model: Model): Boolean = {
+          true
         }
 
-        var next: Event = new Event {
-          var current: EventAction = new EventFight {
-            var list = listFight
+      }
+      next = new HaveEvent {
+        current = new EventFight {
+          var list = listFight
+
+          def eventDone(model: Model): Boolean = {
+            println("RDS")
+            model.modelFight.atacker.die || model.modelFight.defenser.die
           }
-          var next: Event = null
         }
-
+        next = haveEvent
       }
     }
   }

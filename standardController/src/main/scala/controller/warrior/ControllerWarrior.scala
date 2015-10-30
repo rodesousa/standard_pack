@@ -6,7 +6,9 @@ import controller.warrior.resolver.ResolverWarrior
 import standard.model.event.{HaveEvent, StructEvent}
 import standard.model.map.cellule.Cellule
 import standard.resources.Variables._
+import warrior.fight.ModelFightWarrior
 import warrior.model.ModelWarrior
+import warrior.perso.CharacterFighter
 
 import scala.annotation.tailrec
 import scala.collection.mutable
@@ -15,47 +17,70 @@ import scala.collection.mutable
  * * Created by rds on 07/05/15.
  */
 
-class ControllerWarrior(_modelWarrior: ModelWarrior) extends Controller(_modelWarrior) {
+class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
+
   val pipeEvent = new StructEvent
-  var controllerFight: ControllerFightWarrior = null
+  var controllerFight = new ControllerFightWarrior(this)
   val arrayResolveEvent = new mutable.HashMap[HaveEvent, Int]
-  val model = _modelWarrior
+
+  def model = _model
+
   val resolver = new ResolverWarrior
+
+  def initModelFight() = {
+    val defenser = pipeEvent.events match {
+      case e: CharacterFighter => e
+    }
+    model.modelFight = new ModelFightWarrior(model.currentPerso, defenser)
+    controllerFight.modelFight = model.modelFight
+  }
+
+  def eventIsItDone(): Boolean = {
+    pipeEvent.events.current.eventDone(model)
+  }
 
   //RESOLUTION ENTIERE DES EVENTS
   def resolveAll() = {
-    if (_modelWarrior.stateGame == EVENT_FIGHT_DONE)
-      _modelWarrior.stateGame = EVENT_NONE
+    if (_model.stateGame == EVENT_FIGHT_DONE)
+      _model.stateGame = EVENT_NONE
 
     //Partie pour tout event autre que le combat
-    if (_modelWarrior.stateGame == EVENT_NONE || _modelWarrior.stateGame == EVENT_DEPLACEMENT) {
-
+    if (_model.stateGame == EVENT_NONE || _model.stateGame == EVENT_DEPLACEMENT) {
+      println("EXTRAIT")
       val cel = extractEvent()
       if (cel != null && cel.event != null)
-        pipeEvent.haveEvent = cel.event
+        pipeEvent.events = cel.event
       else if (DEBUG)
         println("Pas d'event")
 
     }
-    if (pipeEvent.haveEvent != null) {
 
-      _modelWarrior.stateGame = resolver.resolveEvent(this)
+    if (pipeEvent.events != null) {
+      _model.stateGame = resolver.resolveEvent(this)
 
       if (DEBUG)
-        println(s"ControllerWarrior: L'event est ${_modelWarrior.stateGame}")
+        println(s"ControllerWarrior: L'event est ${_model.stateGame}")
 
-      pipeEvent.nextEvent()
+      //On regarde si l'event est fini pour passer au suivant
+      nextEvent()
+
     }
 
     else
-      _modelWarrior.stateGame = EVENT_NONE
+      _model.stateGame = EVENT_NONE
   }
 
-  def lifeAction(key: Int): Boolean = _modelWarrior.stateGame match {
-    case EVENT_DEPLACEMENT => listDeplacement.filter(_ == key).nonEmpty
-    case EVENT_DIALOGUE => listDialogue.filter(_ == key).nonEmpty
+  def nextEvent(): Unit = {
+    if (eventIsItDone()) {
+      pipeEvent.nextEvent()
+    }
+  }
+
+  def lifeAction(key: Int): Boolean = _model.stateGame match {
+    case EVENT_DEPLACEMENT => listDeplacement.contains(key)
+    case EVENT_DIALOGUE => listDialogue.contains(key)
     case EVENT_NONE => true
-    case EVENT_FIGHT | EVENT_FIGHT_DONE => listFight.filter(_ == key).nonEmpty
+    case EVENT_FIGHT | EVENT_FIGHT_DONE => listFight.contains(key)
     case _ => false
   }
 
@@ -72,23 +97,17 @@ class ControllerWarrior(_modelWarrior: ModelWarrior) extends Controller(_modelWa
       }
     }
     //On regarde si le prochain move (qui depent de directionCurrent) à dans la cellule un event
-    val cellules = _modelWarrior.currentMap.cellules
-    _modelWarrior.currentPerso.directionCurrent match {
-      case DIRECTION_LEFT => itrZoneWalking(cellules, _modelWarrior.currentPerso.x + (_modelWarrior.currentPerso.pas * -1),
-        _modelWarrior.currentPerso.y)
-      case DIRECTION_RIGHT => itrZoneWalking(cellules, _modelWarrior.currentPerso.x + (_modelWarrior.currentPerso.pas * 1),
-        _modelWarrior.currentPerso.y)
-      case DIRECTION_UP => itrZoneWalking(cellules, _modelWarrior.currentPerso.x,
-        _modelWarrior.currentPerso.y + (_modelWarrior.currentPerso.pas * -1))
-      case DIRECTION_DOWN => itrZoneWalking(cellules, _modelWarrior.currentPerso.x,
-        _modelWarrior.currentPerso.y + (_modelWarrior.currentPerso.pas * 1))
+    val cellules = _model.currentMap.cellules
+    _model.currentPerso.directionCurrent match {
+      case DIRECTION_LEFT => itrZoneWalking(cellules, _model.currentPerso.x + (_model.currentPerso.pas * -1),
+        _model.currentPerso.y)
+      case DIRECTION_RIGHT => itrZoneWalking(cellules, _model.currentPerso.x + (_model.currentPerso.pas * 1),
+        _model.currentPerso.y)
+      case DIRECTION_UP => itrZoneWalking(cellules, _model.currentPerso.x,
+        _model.currentPerso.y + (_model.currentPerso.pas * -1))
+      case DIRECTION_DOWN => itrZoneWalking(cellules, _model.currentPerso.x,
+        _model.currentPerso.y + (_model.currentPerso.pas * 1))
     }
   }
 
-  def isFightDone = model.stateGame == EVENT_FIGHT_DONE
-
-
-  private def removeControllerFight() {
-    controllerFight = null
-  }
 }

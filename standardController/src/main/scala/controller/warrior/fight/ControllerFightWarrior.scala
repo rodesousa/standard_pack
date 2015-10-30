@@ -2,48 +2,46 @@ package controller.warrior.fight
 
 import controller.standard.fight.ControllerFight
 import controller.warrior.ControllerWarrior
+import standard.resources.Variables
 import standard.resources.Variables._
-import warrior.fight.menu.{EleAction, EleMenu, EleTechnique}
-import warrior.fight.{CombatWarrior, ModelFightWarrior}
+import warrior.fight.technique.action.ActionFight
+import warrior.fight.{ModelFightWarrior, ResolveFight}
 
 /**
  * * Created by rds on 19/05/15.
  */
-class ControllerFightWarrior(controllerWarrior: ControllerWarrior, _modelFight: ModelFightWarrior) extends ControllerFight{
+class ControllerFightWarrior(_controller: ControllerWarrior) extends ControllerFight {
 
-  val modelFight = _modelFight
+  var modelFight: ModelFightWarrior = null
 
-  def lifeAction(key: Int) = listFight.filter(_ == key).nonEmpty
+  def lifeAction(key: Int) = listFight.contains(key)
 
-  def resolveAll() {
-    modelFight.stateEleMenu match {
-      case e: EleMenu =>
-        modelFight.stateEleMenu = modelFight.listTechnique.head
-      case e: EleTechnique => modelFight.addActions(e)
-        modelFight.stateEleMenu = modelFight.listAction.head
-      case e: EleAction =>
-        CombatWarrior.fight(modelFight.atacker, modelFight.defenser, controllerWarrior.model, e.action)
-        if (modelFight.atacker.die || modelFight.defenser.die)
-          controllerWarrior.model.stateGame = EVENT_FIGHT_DONE
-    }
+  def fightIsItDone(): Boolean = _controller.fightIsItDone()
+
+  def eventDone() {
+    _controller.eventDone()
   }
 
-  def move(indication: String) = {
-    if (indication == DIRECTION_DOWN) {
-      modelFight.stateEleMenu = modelFight.stateEleMenu.next
-    }
-    if (indication == DIRECTION_UP) {
-      modelFight.stateEleMenu = modelFight.stateEleMenu.before
-    }
-    if (indication == DIRECTION_LEFT) {
-      modelFight.stateEleMenu match {
-        case e: EleMenu => ()
-        case e: EleAction => modelFight.stateEleMenu = e.parent
-        case e: EleTechnique => modelFight.stateEleMenu = e.parent
-      }
-    }
-    if (indication == DIRECTION_RIGHT)
-      resolveAll()
+  def fightDone() {
+    _controller.fightDone()
+  }
+
+  def eventIsItDone(): Boolean = {
+    _controller.eventIsItDone()
+  }
+
+  def resolveFight(action: ActionFight) {
+
+    if (Variables.DEBUG)
+      println("Fight")
+
+    ResolveFight.fight(modelFight.atacker, modelFight.defenser, _controller.model, action)
+
+    if (Variables.DEBUG)
+      println(s"atacker die ? ${modelFight.atacker.die} defenser die ? ${modelFight.defenser.die}")
+
+    if (eventIsItDone())
+      fightDone()
   }
 
 }

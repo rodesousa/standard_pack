@@ -8,7 +8,8 @@ import warrior.item.weapon.WarriorWeapon
  * * Created by rds on 20/05/15.
  */
 trait FighterWarrior extends Fighter {
-  def techniquesCombat: List[Technique]
+  def listTechnique: List[Technique]
 
   def arme: WarriorWeapon
+
 }
