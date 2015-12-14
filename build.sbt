@@ -1,5 +1,7 @@
 mainClass := Some("editorLauncher.editor.launcher.Launcher")
 
+libraryDependencies += "org.scalatest" % "scalatest_2.10" % "2.0" % "test"
+
 lazy val root = (project in file(".")).
   settings(
     version := "0.1.0",
