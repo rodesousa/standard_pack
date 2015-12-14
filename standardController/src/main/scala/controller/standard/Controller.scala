@@ -11,7 +11,7 @@ abstract class Controller(_model: Model) {
 
   def model: Model
 
-  def pipeEvent: StructEvent
+  val pipeEvent = new StructEvent
 
   def resolver: Resolver
 

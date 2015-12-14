@@ -19,7 +19,6 @@ import scala.collection.mutable
 
 class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
 
-  val pipeEvent = new StructEvent
   val arrayResolveEvent = new mutable.HashMap[HaveEvent, Int]
   val resolver = new ResolverWarrior
   var controllerFight = new ControllerFightWarrior(this)
