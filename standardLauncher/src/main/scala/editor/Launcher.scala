@@ -1,6 +1,6 @@
 package editor
 
-import controller.controller.ControllerEditor
+import controller.editor.controller.ControllerEditor
 import editor.model.ModelEditor
 import view.editor.ViewEditor
 

@@ -1,6 +1,6 @@
 package view.editor
 
-import controller.controller.ControllerEditor
+import controller.editor.controller.ControllerEditor
 import view.editor.listener.ListenerEditor
 import view.editor.panel.{PanelEditor, PanelFightEditor}
 import view.standard.View
