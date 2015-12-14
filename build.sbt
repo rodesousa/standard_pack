@@ -2,13 +2,13 @@ mainClass := Some("editorLauncher.editor.launcher.Launcher")
 
 libraryDependencies += "org.scalatest" % "scalatest_2.10" % "2.0" % "test"
 
-lazy val root = (project in file(".")).
-  settings(
-    version := "0.1.0",
-    scalaVersion := "2.11.4",
-    mainClass := Some("editorLauncher.editor.launcher.Launcher")
-  ) aggregate(standardResource, standardModel, standardView,
-  standardController, standardLauncher, editorModel, editorController, editorView, editorLauncher)
+//lazy val root = (project in file(".")).
+//  settings(
+//    version := "0.1.0",
+//    scalaVersion := "2.11.4",
+//    mainClass := Some("editorLauncher.editor.launcher.Launcher")
+//  ) aggregate(standardResource, standardModel, standardView,
+//  standardController, standardLauncher, editorModel, editorController, editorView, editorLauncher)
 
 lazy val standardResource = (project in file("standardResource")).
   settings(
@@ -39,27 +39,3 @@ lazy val standardLauncher = (project in file("standardLauncher")).
     version := "0.1.0",
     scalaVersion := "2.11.4"
   ) dependsOn(standardResource, standardModel, standardController, standardView)
-
-lazy val editorModel = (project in file("editorModel")).
-  settings(
-    version := "0.1.0",
-    scalaVersion := "2.11.4"
-  ) dependsOn(standardResource, standardModel)
-
-lazy val editorController = (project in file("editorController")).
-  settings(
-    version := "0.1.0",
-    scalaVersion := "2.11.4"
-  ) dependsOn(standardResource, standardModel, standardController, editorModel)
-
-lazy val editorView = (project in file("editorView")).
-  settings(
-    version := "0.1.0",
-    scalaVersion := "2.11.4"
-  ) dependsOn(standardResource, standardModel, standardController, standardView, editorModel, editorController)
-
-lazy val editorLauncher = (project in file("editorLauncher")).
-  settings(
-    version := "0.1.0",
-    scalaVersion := "2.11.4"
-  ) dependsOn(standardResource, standardModel, standardController, standardView, editorModel, editorController, editorView)
