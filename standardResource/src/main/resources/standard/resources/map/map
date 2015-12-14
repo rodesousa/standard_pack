@@ -1,6 +1,7 @@
 prePath=/home/rds/workspace/
 
 path=sbt-workspace/editorResource/src/main/resources/map/map
-img=map.jpg
+img=map2.png
+img2=map.jpg
 key=map1
 zoneWalking=0

@@ -22,14 +22,6 @@ class ControllerFightWarrior(_controller: ControllerWarrior) extends ControllerF
     _controller.eventDone()
   }
 
-  def fightDone() {
-    _controller.fightDone()
-  }
-
-  def eventIsItDone(): Boolean = {
-    _controller.eventIsItDone()
-  }
-
   def resolveFight(action: ActionFight) {
 
     if (Variables.DEBUG)
@@ -42,6 +34,14 @@ class ControllerFightWarrior(_controller: ControllerWarrior) extends ControllerF
 
     if (eventIsItDone())
       fightDone()
+  }
+
+  def fightDone() {
+    _controller.fightDone()
+  }
+
+  def eventIsItDone(): Boolean = {
+    _controller.eventIsItDone()
   }
 
 }

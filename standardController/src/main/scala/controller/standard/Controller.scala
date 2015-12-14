@@ -35,7 +35,7 @@ abstract class Controller(_model: Model) {
     model.stateGame == Variables.EVENT_FIGHT_DONE
   }
 
-  def fightDone(){
+  def fightDone() {
     model.stateGame = Variables.EVENT_FIGHT_DONE
   }
 

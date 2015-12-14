@@ -20,12 +20,9 @@ import scala.collection.mutable
 class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
 
   val pipeEvent = new StructEvent
-  var controllerFight = new ControllerFightWarrior(this)
   val arrayResolveEvent = new mutable.HashMap[HaveEvent, Int]
-
-  def model = _model
-
   val resolver = new ResolverWarrior
+  var controllerFight = new ControllerFightWarrior(this)
 
   def initModelFight() = {
     val defenser = pipeEvent.events match {
@@ -33,10 +30,6 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
     }
     model.modelFight = new ModelFightWarrior(model.currentPerso, defenser)
     controllerFight.modelFight = model.modelFight
-  }
-
-  def eventIsItDone(): Boolean = {
-    pipeEvent.events.current.eventDone(model)
   }
 
   //RESOLUTION ENTIERE DES EVENTS
@@ -76,13 +69,11 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
     }
   }
 
-  def lifeAction(key: Int): Boolean = _model.stateGame match {
-    case EVENT_DEPLACEMENT => listDeplacement.contains(key)
-    case EVENT_DIALOGUE => listDialogue.contains(key)
-    case EVENT_NONE => true
-    case EVENT_FIGHT | EVENT_FIGHT_DONE => listFight.contains(key)
-    case _ => false
+  def eventIsItDone(): Boolean = {
+    pipeEvent.events.current.eventDone(model)
   }
+
+  def model = _model
 
   //On regarde si dans la case en face du celle du perso current, il y a un event. Si oui on l'ajoute
   private def extractEvent(): Cellule = {
@@ -108,6 +99,14 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
       case DIRECTION_DOWN => itrZoneWalking(cellules, _model.currentPerso.x,
         _model.currentPerso.y + (_model.currentPerso.pas * 1))
     }
+  }
+
+  def lifeAction(key: Int): Boolean = _model.stateGame match {
+    case EVENT_DEPLACEMENT => listDeplacement.contains(key)
+    case EVENT_DIALOGUE => listDialogue.contains(key)
+    case EVENT_NONE => true
+    case EVENT_FIGHT | EVENT_FIGHT_DONE => listFight.contains(key)
+    case _ => false
   }
 
 }

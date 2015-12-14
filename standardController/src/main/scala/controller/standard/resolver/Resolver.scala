@@ -22,9 +22,6 @@ abstract class Resolver {
     EVENT_BEGIN_FIGHT
   }
 
-  //resoud les dialogues
-  def resolveDialogue(e: EventDialogue) = EVENT_DIALOGUE
-
   def initControllerFight(controller: Controller) {
     val defenser = controller.pipeEvent.events match {
       case e: CharacterFighter => e
@@ -36,4 +33,7 @@ abstract class Resolver {
     //    }
     ???
   }
+
+  //resoud les dialogues
+  def resolveDialogue(e: EventDialogue) = EVENT_DIALOGUE
 }

@@ -2,7 +2,7 @@ package standard.resources
 
 object Variables {
 
-  val PATH_GLOBAL_PROPERTIES  = "src\\source\\global.properties"
+  val PATH_GLOBAL_PROPERTIES = "src\\source\\global.properties"
   val PATH_FOLDER_MAP = "ressources\\source\\map\\"
   val PATH_FOLDER_PERSO = "ressources\\source\\perso\\"
 
