@@ -16,7 +16,7 @@ class ViewEditor(_controller: ControllerEditor) extends View(_controller) {
   var panelGame = new PanelEditor(model)
   this.init()
 
-  def initFight: Unit = ???
+  def initFight(): Unit = ???
 
-  def deleteFight: Unit = ???
+  def deleteFight(): Unit = ???
 }

@@ -27,17 +27,11 @@ class ModelEditor extends Model {
     var vit = 10
   }
 
-  var list = scala.collection.mutable.Map[Int, Int]()
+  var list : List[(Int, Int)] = Nil
 
-  def setListToZoneWalking() {
-    if (list.contains(currentPerso.x)) {
-      if (list(currentPerso.x) < currentPerso.y) list(currentPerso.x) = currentPerso.y
-    }
-    else list(currentPerso.x) = currentPerso.y
-  }
-
-  def writeZoneWalkingMap() {
+  def setZoneWalking() {
     list.foreach(println)
     println("-----------------------------------------")
   }
+
 }

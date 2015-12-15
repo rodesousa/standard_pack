@@ -19,8 +19,6 @@ class PanelEditor(_model: ModelEditor) extends JPanel {
     g.drawImage(ImageIO.read(new File(model.currentMap.img)), 0, 0, this)
     g.drawImage(ImageIO.read(new File(viewPerso.currentDirectionEtape)), viewPerso.perso.x, viewPerso.perso.y,
       this)
-
-    model.list.foreach(p => println(p._1))
   }
 
 }

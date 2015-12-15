@@ -16,10 +16,10 @@ class ListenerEditor(view: ViewEditor) extends Listener(view) {
       view.model.currentPerso canDo(view.model, e.getKeyCode.toString)
     }
     else if (e.getKeyCode == KeyEvent.VK_C) {
-      view.model.setListToZoneWalking
+      view.controller.writeZoneWalking()
     }
     else if (e.getKeyCode == KeyEvent.VK_X) {
-      view.model.writeZoneWalkingMap
+      view.model.setZoneWalking()
     }
     else if (e.getKeyCode == KeyEvent.VK_W) {
     }
