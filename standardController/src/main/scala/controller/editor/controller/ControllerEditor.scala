@@ -24,7 +24,7 @@ class ControllerEditor(_model: ModelEditor) extends Controller(_model) {
   }
 
   def setZoneWalking() {
-    model.mutableZoneWalking.foreach(a => print(s"${a._1} ${a._1};"))
+    model.mutableZoneWalking.foreach(a => print(s"${a._1} ${a._2};"))
   }
 
   def removeZoneWalking(direction: String) {

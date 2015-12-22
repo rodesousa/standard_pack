@@ -11,10 +11,10 @@ abstract class DeplaceurEditor(_nomFichier: String) extends Deplaceur(_nomFichie
 
   def canDo(model: ModelEditor, direction: String) {
     direction match {
-      case Variables.DIRECTION_LEFT => if (tryHorizontale(model, -1)) toDoHorizontale(-1, direction);
-      case Variables.DIRECTION_RIGHT => if (tryHorizontale(model, 1)) toDoHorizontale(1, direction)
-      case Variables.DIRECTION_UP => if (tryVerticale(model, -1)) toDoVerticale(-1, direction)
-      case Variables.DIRECTION_DOWN => if (tryVerticale(model, 1)) toDoVerticale(1, direction)
+      case Variables.DIRECTION_LEFT => toDoHorizontale(model, -1, direction);
+      case Variables.DIRECTION_RIGHT => toDoHorizontale(model, 1, direction)
+      case Variables.DIRECTION_UP => toDoVerticale(model, -1, direction)
+      case Variables.DIRECTION_DOWN => toDoVerticale(model, 1, direction)
     }
   }
 
@@ -28,6 +28,18 @@ abstract class DeplaceurEditor(_nomFichier: String) extends Deplaceur(_nomFichie
     if (y + (pas * indice) < 0)
       return false
     !model.mutableZoneWalking.contains((x, y + (pas * indice)))
+  }
+
+  def toDoHorizontale(model: ModelEditor, indice: Int, direction: String) {
+    if (tryHorizontale(model, indice) && direction == directionCurrent)
+      x += (pas * indice)
+    directionCurrent = direction
+  }
+
+  def toDoVerticale(model: ModelEditor, indice: Int, direction: String) {
+    if (tryVerticale(model, indice) && direction == directionCurrent)
+      y += (pas * indice)
+    directionCurrent = direction
   }
 
 }
