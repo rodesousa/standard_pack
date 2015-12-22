@@ -1,12 +1,9 @@
 package standard.model.perso.job
 
-import java.awt.Point
 import standard.model.fonction.action.deplacement.Mobilite
 import standard.model.model.Model
 import standard.model.perso.Personnage
 import standard.resources.Variables
-
-import scala.annotation.tailrec
 
 /**
  * Created by rodesousa on 20/10/15.
@@ -25,28 +22,18 @@ abstract class Deplaceur(_nomFichier: String) extends Personnage(_nomFichier) wi
   }
 
   private def tryHorizontale(model: Model, indice: Int): Boolean = {
-    @tailrec
-    def itrZoneWalking(list: List[Point]): Boolean = {
-      list match {
-        case head :: tail => if (x + (pas * indice) >= head.x) true else itrZoneWalking(tail);
-        case _ => false;
-      }
-    }
-    itrZoneWalking(model.currentMap.walkPossible)
+    if (x + (pas * indice) < 0)
+      return false
+    !model.currentMap.possitionOccuped.contains((x + (pas * indice), y))
   }
 
   private def tryVerticale(model: Model, indice: Int): Boolean = {
-    @tailrec
-    def itrZoneWalking(list: List[Point]): Boolean = {
-      list match {
-        case head :: tail => if (y + (pas * indice) <= head.y) true else itrZoneWalking(tail)
-        case _ => false;
-      }
-    }
-    itrZoneWalking(model.currentMap.walkPossible)
+    if (y + (pas * indice) < 0)
+      return false
+    !model.currentMap.possitionOccuped.contains((x, y + (pas * indice)))
   }
 
-  private def toDoHorizontale(indice: Int, direction: String) {
+  def toDoHorizontale(indice: Int, direction: String) {
     if (direction == directionCurrent)
       x += (pas * indice)
     directionCurrent = direction

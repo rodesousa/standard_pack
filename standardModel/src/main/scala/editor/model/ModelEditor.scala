@@ -27,11 +27,6 @@ class ModelEditor extends Model {
     var vit = 10
   }
 
-  var list : List[(Int, Int)] = Nil
-
-  def setZoneWalking() {
-    list.foreach(println)
-    println("-----------------------------------------")
-  }
+  var mutableZoneWalking = currentMap.possitionOccuped
 
 }

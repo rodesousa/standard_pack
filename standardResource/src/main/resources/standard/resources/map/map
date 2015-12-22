@@ -4,4 +4,5 @@ path=sbt-workspace/editorResource/src/main/resources/map/map
 img=map2.png
 img2=map.jpg
 key=map1
-zoneWalking=0
+zoneWalking=((0,45))
+zoneWalkingDeBase=0

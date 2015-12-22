@@ -8,7 +8,7 @@ object Launcher {
   def main(args: Array[String]) {
     val model = new ModelEditor
     val controller = new ControllerEditor(model)
-    val view = new ViewEditor(controller)
+    new ViewEditor(controller)
 
   }
 }
