@@ -1,9 +1,9 @@
 package view.standard.listener
 
-import java.awt.event.{KeyListener, MouseListener}
+import java.awt.event.KeyListener
 
 /**
  * Created by rodesousa on 23/10/15.
  */
-abstract class ListenerFight extends KeyListener with MouseListener {
+abstract class ListenerFight extends KeyListener {
 }
