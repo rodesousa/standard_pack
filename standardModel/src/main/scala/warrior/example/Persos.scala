@@ -62,7 +62,7 @@ object Persos {
   def PnjTOEvent(model: ModelWarrior) {
     val pnj = createPNJ
 
-    val cellule = new Cellule(0, 0) {
+    val cellule = new Cellule(0, 75) {
       event = pnj
     }
 

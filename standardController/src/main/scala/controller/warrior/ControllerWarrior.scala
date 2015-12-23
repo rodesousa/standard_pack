@@ -10,7 +10,6 @@ import warrior.fight.ModelFightWarrior
 import warrior.model.ModelWarrior
 import warrior.perso.CharacterFighter
 
-import scala.annotation.tailrec
 import scala.collection.mutable
 
 /**
@@ -33,16 +32,20 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
 
   //RESOLUTION ENTIERE DES EVENTS
   def resolveAll() = {
-    if (_model.stateGame == EVENT_FIGHT_DONE)
-      _model.stateGame = EVENT_NONE
+    _model.stateGame match {
 
-    //Partie pour tout event autre que le combat
-    if (_model.stateGame == EVENT_NONE || _model.stateGame == EVENT_DEPLACEMENT) {
-      val cel = extractEvent()
-      if (cel != null && cel.event != null)
-        pipeEvent.events = cel.event
-      else if (DEBUG)
-        println("Pas d'event")
+      case EVENT_FIGHT_DONE =>
+        _model.stateGame = EVENT_NONE
+
+      //Partie pour tout event autre que le combat
+      case EVENT_NONE | EVENT_DEPLACEMENT =>
+        val cel = extractEvent()
+        if (cel.isDefined && cel.get.event != null)
+          pipeEvent.events = cel.get.event
+        else if (DEBUG)
+          println("Pas d'event")
+
+      case _ => ()
     }
 
     if (pipeEvent.events != null) {
@@ -53,7 +56,6 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
 
       //On regarde si l'event est fini pour passer au suivant
       nextEvent()
-
     }
 
     else
@@ -73,29 +75,20 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
   def model = _model
 
   //On regarde si dans la case en face du celle du perso current, il y a un event. Si oui on l'ajoute
-  private def extractEvent(): Cellule = {
-    @tailrec
-    def itrZoneWalking(list: List[Cellule], firstCondition: Int, secondCondition: Int): Cellule = {
-      list match {
-        case head :: tail =>
-          if (firstCondition >= head.x &&
-            secondCondition >= head.y) head
-          else itrZoneWalking(tail, firstCondition, secondCondition)
-        case _ => null
-      }
+  private def extractEvent(): Option[Cellule] = {
+    def cellules = _model.currentMap.cellules
+    def perso = _model.currentPerso
+    def pas = perso.pas
+    def x = perso.x
+    def y = perso.y
+
+    val list = _model.currentPerso.directionCurrent match {
+      case DIRECTION_LEFT => cellules.filter(a => (a.x, a.y) ==(x + (pas * -2), y))
+      case DIRECTION_RIGHT => cellules.filter(a => (a.x, a.y) ==(x + (pas * 2), y))
+      case DIRECTION_UP => cellules.filter(a => (a.x, a.y) ==(x, y + (pas * -2)))
+      case DIRECTION_DOWN => cellules.filter(a => (a.x, a.y) ==(x, y + (pas * 2)))
     }
-    //On regarde si le prochain move (qui depent de directionCurrent) à dans la cellule un event
-    val cellules = _model.currentMap.cellules
-    _model.currentPerso.directionCurrent match {
-      case DIRECTION_LEFT => itrZoneWalking(cellules, _model.currentPerso.x + (_model.currentPerso.pas * -1),
-        _model.currentPerso.y)
-      case DIRECTION_RIGHT => itrZoneWalking(cellules, _model.currentPerso.x + (_model.currentPerso.pas * 1),
-        _model.currentPerso.y)
-      case DIRECTION_UP => itrZoneWalking(cellules, _model.currentPerso.x,
-        _model.currentPerso.y + (_model.currentPerso.pas * -1))
-      case DIRECTION_DOWN => itrZoneWalking(cellules, _model.currentPerso.x,
-        _model.currentPerso.y + (_model.currentPerso.pas * 1))
-    }
+    list.headOption
   }
 
   def lifeAction(key: Int): Boolean = _model.stateGame match {
