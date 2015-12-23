@@ -24,7 +24,7 @@ class ListenerFightWarrior(view: ViewWarrior, controllerFight: ControllerFightWa
             case e: AreaAction => controllerFight.resolveFight(view.panelFight.viewModelFight.areaAction.elementCurrent.get)
             case _ => this.move(KeyEvent.VK_RIGHT.toString)
           }
-         
+
         case _ => ()
       }
     }

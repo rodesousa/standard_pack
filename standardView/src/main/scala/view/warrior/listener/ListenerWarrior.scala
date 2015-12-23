@@ -16,26 +16,26 @@ class ListenerWarrior(view: ViewWarrior) extends Listener(view) {
   override def keyPressed(e: KeyEvent) {
     if (view.model.stateGame != Variables.EVENT_FIGHT_DONE) {
       if (view.controller.lifeAction(e.getKeyCode)) {
-        if (e.getKeyCode == KeyEvent.VK_RIGHT || e.getKeyCode == KeyEvent.VK_LEFT ||
-          e.getKeyCode == KeyEvent.VK_UP || e.getKeyCode == KeyEvent.VK_DOWN) {
-          view.controller.move(e.getKeyCode.toString, currentPerso)
+        // Soit on se deplace soit on essaye un event
+        e.getKeyCode match {
+          case KeyEvent.VK_RIGHT | KeyEvent.VK_LEFT | KeyEvent.VK_UP | KeyEvent.VK_DOWN =>
+            view.controller.move(e.getKeyCode.toString, currentPerso)
+          case KeyEvent.VK_ENTER =>
+            view.controller.resolveAll()
+            if (view.controller.model.stateGame == EVENT_BEGIN_FIGHT) {
+              view.initFight()
+              changeGametoFight()
+            }
         }
-        else if (e.getKeyCode == KeyEvent.VK_ENTER) {
-          view.controller.resolveAll()
-          if (view.controller.model.stateGame == EVENT_BEGIN_FIGHT) {
-            view.initFight()
-            changeGametoFight()
-          }
-        }
-
-        if (view.controller.model.stateGame == EVENT_FIGHT)
-          view.panelFight.updateUI()
-        else
-          view.panelGame.updateUI()
-
-        if (Variables.DEBUG)
-          println(s"Etat du jeu: ${view.controller.model.stateGame}")
       }
+      // passage au listenerFightWarrior
+      if (view.controller.model.stateGame == EVENT_FIGHT)
+        view.panelFight.updateUI()
+      else
+        view.panelGame.updateUI()
+
+      if (Variables.DEBUG)
+        println(s"Etat du jeu: ${view.controller.model.stateGame}")
     }
     else {
       // FIN D'UN COMBAT
