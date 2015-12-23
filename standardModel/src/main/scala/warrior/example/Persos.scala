@@ -114,8 +114,8 @@ object Persos {
       haveEvent.next.next = haveEvent
 
       current = new EventDialogue {
-        var subject = "Bastien la fiotte"
-        var text = "Halte la PD ! Combattons comme de jeune pucelle !"
+        val subject = "Bastien la fiotte"
+        val text = "Halte la PD ! Combattons comme de jeune pucelle !"
         val list = listDialogue
 
         def eventDone(model: Model): Boolean = {
@@ -125,7 +125,7 @@ object Persos {
       }
       next = new HaveEvent {
         current = new EventFight {
-          var list = listFight
+          val list = listFight
 
           def eventDone(model: Model): Boolean = {
             println("RDS")
