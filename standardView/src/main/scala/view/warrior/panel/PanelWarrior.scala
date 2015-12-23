@@ -28,13 +28,12 @@ class PanelWarrior(model: ModelWarrior) extends PanelHome {
       this)
 
     if (model.stateGame eq Variables.EVENT_DIALOGUE) {
-      println("EVENT_DIALOGUE")
       val font = new Font("Courier", Font.BOLD, 20)
       g.setFont(font)
       g.setColor(Color.red)
       g.drawImage(ImageIO.read(new File(Variables.BLACK)), 0, 400, 680, 150, this)
-      g.drawString("Game MASTER", 0, 420)
-      g.drawString("NOT IMPL", 0, 480)
+      g.drawString(model.dialogue.get.subject, 0, 420)
+      g.drawString(model.dialogue.get.text, 0, 480)
     }
   }
 }

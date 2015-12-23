@@ -13,7 +13,7 @@ class ResolverWarrior extends Resolver {
 
   def resolveEvent(controller: ControllerWarrior) =
     controller.pipeEvent.events.current match {
-      case e: EventDialogue => this.resolveDialogue(e)
+      case e: EventDialogue => this.resolveDialogue(e, controller)
       case e: EventFight => this.resolveFight(controller)
       case _ => EVENT_DEPLACEMENT
     }

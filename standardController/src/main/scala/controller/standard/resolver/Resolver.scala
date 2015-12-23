@@ -1,9 +1,11 @@
 package controller.standard.resolver
 
 import controller.standard.Controller
+import standard.model.dialogue.Dialogue
 import standard.model.event.action.{EventDialogue, EventFight}
 import standard.resources.Variables._
 import warrior.perso.CharacterFighter
+
 
 /**
  * Created by rodesousa on 22/10/15.
@@ -12,7 +14,7 @@ abstract class Resolver {
 
   def resolveEvent(controller: Controller): String =
     controller.pipeEvent.events.current match {
-      case e: EventDialogue => resolveDialogue(e)
+      case e: EventDialogue => resolveDialogue(e, controller)
       case e: EventFight => resolveFight(controller)
     }
 
@@ -35,5 +37,8 @@ abstract class Resolver {
   }
 
   //resoud les dialogues
-  def resolveDialogue(e: EventDialogue) = EVENT_DIALOGUE
+  def resolveDialogue(e: EventDialogue, controller: Controller) = {
+    controller.model.dialogue = Option(new Dialogue(e.subject, e.text))
+    EVENT_DIALOGUE
+  }
 }

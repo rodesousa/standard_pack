@@ -1,5 +1,6 @@
 package standard.model.model
 
+import standard.model.dialogue.Dialogue
 import standard.model.fight.ModelFight
 import standard.model.map.Map
 import standard.model.perso.Personnage
@@ -10,6 +11,7 @@ import scala.collection.mutable
 
 abstract class Model() {
   var stateGame = Variables.EVENT_NONE
+  var dialogue: Option[Dialogue] = None
 
   def etatMaps: mutable.HashMap[String, Map]
 
@@ -20,5 +22,4 @@ abstract class Model() {
   def currentPerso: Deplaceur
 
   def modelFight: ModelFight
-
 }

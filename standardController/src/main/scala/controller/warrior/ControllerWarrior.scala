@@ -3,7 +3,7 @@ package controller.warrior
 import controller.standard.Controller
 import controller.warrior.fight.ControllerFightWarrior
 import controller.warrior.resolver.ResolverWarrior
-import standard.model.event.{HaveEvent, StructEvent}
+import standard.model.event.HaveEvent
 import standard.model.map.cellule.Cellule
 import standard.resources.Variables._
 import warrior.fight.ModelFightWarrior
@@ -38,13 +38,11 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
 
     //Partie pour tout event autre que le combat
     if (_model.stateGame == EVENT_NONE || _model.stateGame == EVENT_DEPLACEMENT) {
-      println("EXTRAIT")
       val cel = extractEvent()
       if (cel != null && cel.event != null)
         pipeEvent.events = cel.event
       else if (DEBUG)
         println("Pas d'event")
-
     }
 
     if (pipeEvent.events != null) {
