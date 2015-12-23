@@ -128,7 +128,6 @@ object Persos {
           val list = listFight
 
           def eventDone(model: Model): Boolean = {
-            println("RDS")
             model.modelFight.atacker.die || model.modelFight.defenser.die
           }
         }

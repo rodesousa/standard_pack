@@ -13,9 +13,7 @@ import warrior.model.ModelWarrior
 object Launcher {
   def main(args: Array[String]) {
     // init model
-    val model = new ModelWarrior
-    model.changeMap(new MapWarrior(Variables.MAP_NAME))
-    model.changePerso(Persos.createPersoPri)
+    val model = new ModelWarrior(new MapWarrior(Variables.MAP_NAME), Persos.createPersoPri)
 
     Persos.PnjTOEvent(model)
     val controller = new ControllerWarrior(model)

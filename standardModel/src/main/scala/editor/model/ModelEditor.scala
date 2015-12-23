@@ -1,12 +1,10 @@
 package editor.model
 
 import editor.model.map.MapEditor
-import editor.model.perso.PersoEditor
-import editor.resources.Variables
-import standard.model.item.weapon.SimpleSword
+import editor.model.perso.job.DeplaceurEditor
 import standard.model.model.Model
 
-class ModelEditor extends Model {
+class ModelEditor(_currentMap: MapEditor, _currentPerso: DeplaceurEditor) extends Model(_currentMap, _currentPerso) {
 
   //  def etatMaps: HashMap[String, standard.model.map.Map] = ???
   def etatMaps = ???
@@ -16,17 +14,9 @@ class ModelEditor extends Model {
   //  def etatCompagnons: HashMap[String, PersoEditor] = ???
   def etatCompagnons = ???
 
-  var currentMap = new MapEditor
+  var currentMap = _currentMap
 
-  var currentPerso = new PersoEditor(Variables.PERSONNAGE_NAME) {
-    var str = 10
-    var defe = 10
-    var agi = 10
-    var arme = new SimpleSword
-    var hpMax = 100
-    var vit = 10
-  }
+  var currentPerso = _currentPerso
 
   var mutableZoneWalking = currentMap.possitionOccuped
-
 }

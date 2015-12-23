@@ -9,7 +9,7 @@ import standard.resources.Variables
 
 import scala.collection.mutable
 
-abstract class Model() {
+abstract class Model(_currentMap: Map, _currentPerso: Deplaceur) {
   var stateGame = Variables.EVENT_NONE
   var dialogue: Option[Dialogue] = None
 
