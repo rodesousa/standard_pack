@@ -5,10 +5,7 @@ package standard.model.event
  */
 trait HaveEvent {
 
-  //TODO val ici !
-  //  var event : Event = null
-
-  var current: EventAction = null
-  var next: HaveEvent = null
+  var current: Option[EventAction] = None
+  var next: Option[HaveEvent] = None
 
 }

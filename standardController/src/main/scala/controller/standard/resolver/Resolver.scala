@@ -13,7 +13,7 @@ import warrior.perso.CharacterFighter
 abstract class Resolver {
 
   def resolveEvent(controller: Controller): String =
-    controller.pipeEvent.events.current match {
+    controller.pipeEvent.events.get.current match {
       case e: EventDialogue => resolveDialogue(e, controller)
       case e: EventFight => resolveFight(controller)
     }
@@ -25,7 +25,7 @@ abstract class Resolver {
   }
 
   def initControllerFight(controller: Controller) {
-    val defenser = controller.pipeEvent.events match {
+    val defenser = controller.pipeEvent.events.get match {
       case e: CharacterFighter => e
     }
 

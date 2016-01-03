@@ -3,14 +3,11 @@ package controller.warrior
 import controller.standard.Controller
 import controller.warrior.fight.ControllerFightWarrior
 import controller.warrior.resolver.ResolverWarrior
-import standard.model.event.HaveEvent
 import standard.model.map.cellule.Cellule
 import standard.resources.Variables._
 import warrior.fight.ModelFightWarrior
 import warrior.model.ModelWarrior
 import warrior.perso.CharacterFighter
-
-import scala.collection.mutable
 
 /**
  * * Created by rds on 07/05/15.
@@ -18,12 +15,12 @@ import scala.collection.mutable
 
 class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
 
-  val arrayResolveEvent = new mutable.HashMap[HaveEvent, Int]
+  //  val arrayResolveEvent = new mutable.HashMap[HaveEvent, Int]
   val resolver = new ResolverWarrior
   var controllerFight = new ControllerFightWarrior(this)
 
   def initModelFight() = {
-    val defenser = pipeEvent.events match {
+    val defenser = pipeEvent.events.get match {
       case e: CharacterFighter => e
     }
     model.modelFight = new ModelFightWarrior(model.currentPerso, defenser)
@@ -40,7 +37,7 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
       //Partie pour tout event autre que le combat
       case EVENT_NONE | EVENT_DEPLACEMENT =>
         val cel = extractEvent()
-        if (cel.isDefined && cel.get.event != null)
+        if (cel.isDefined && cel.get.event.isDefined)
           pipeEvent.events = cel.get.event
         else if (DEBUG)
           println("Pas d'event")
@@ -48,7 +45,7 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
       case _ => ()
     }
 
-    if (pipeEvent.events != null) {
+    if (pipeEvent.events.isDefined) {
       _model.stateGame = resolver.resolveEvent(this)
 
       if (DEBUG)
@@ -69,7 +66,7 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
   }
 
   def eventIsItDone(): Boolean = {
-    pipeEvent.events.current.eventDone(model)
+    pipeEvent.events.get.current.get.eventDone(model)
   }
 
   def model = _model
@@ -99,4 +96,4 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
     case _ => false
   }
 
-}
+s}
