@@ -1,5 +1,7 @@
 package standard.model.perso
 
+import standard.resources.Variables
+
 import scala.io.Source
 
 class InfoPerso(_nomFichier: String) {

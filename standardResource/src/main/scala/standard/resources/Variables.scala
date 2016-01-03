@@ -33,4 +33,5 @@ object Variables {
   val BEGIN = "begin"
   val CURSEUR_FIGHT = "menu.jpg"
   val BLACK = "test.jpg"
+  val NOTIMPLE = "NOT IMPLEM"
 }
