@@ -26,6 +26,7 @@ class ListenerWarrior(view: ViewWarrior) extends Listener(view) {
               view.initFight()
               changeGametoFight()
             }
+          case _ => ()
         }
       }
       // passage au listenerFightWarrior
