@@ -15,12 +15,12 @@ import warrior.perso.CharacterFighter
 
 class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
 
-  //  val arrayResolveEvent = new mutable.HashMap[HaveEvent, Int]
   val resolver = new ResolverWarrior
   var controllerFight = new ControllerFightWarrior(this)
 
+  //a chaque combat on init le model
   def initModelFight() = {
-    val defenser = pipeEvent.events.get match {
+    val defenser = pipeEvent match {
       case e: CharacterFighter => e
     }
     model.modelFight = new ModelFightWarrior(model.currentPerso, defenser)
@@ -29,45 +29,38 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
 
   //RESOLUTION ENTIERE DES EVENTS
   def resolveAll() = {
-    _model.stateGame match {
-
-      case EVENT_FIGHT_DONE =>
-        _model.stateGame = EVENT_NONE
-
-      //Partie pour tout event autre que le combat
-      case EVENT_NONE | EVENT_DEPLACEMENT =>
-        val cel = extractEvent()
-        if (cel.isDefined && cel.get.event.isDefined)
-          pipeEvent.events = cel.get.event
-        else if (DEBUG)
-          println("Pas d'event")
-
-      case _ => ()
+    if (pipeEvent.events.isEmpty) {
+      println("Pipe VIDE")
+      val cel = extractEvent()
+      if (cel.isDefined && cel.get.event.isDefined) {
+        pipeEvent.events = cel.get.event
+      }
     }
 
     if (pipeEvent.events.isDefined) {
+      println("Pipe PLEIN")
       _model.stateGame = resolver.resolveEvent(this)
-
-      if (DEBUG)
-        println(s"ControllerWarrior: L'event est ${_model.stateGame}")
-
-      //On regarde si l'event est fini pour passer au suivant
-      nextEvent()
     }
+    if (pipeEvent.events.isDefined)
+      pipeEvent.nextEvent
 
-    else
-      _model.stateGame = EVENT_NONE
   }
 
+  //on cherche si il y a un nouveau event sinon on passe en deplacement
   def nextEvent(): Unit = {
-    if (eventIsItDone()) {
-      pipeEvent.nextEvent()
-    }
+    //    if (eventIsItDone()) {
+    //      if (_model.stateGame.eq(Variables.EVENT_DONE)) {
+    //        pipeEvent.events.get.current = pipeEvent.events.get.next.get.current
+    //        _model.stateGame = EVENT_DEPLACEMENT
+    //        pipeEvent.events = None
+    //      }
+    //      else
+    //        pipeEvent.nextEvent()
+    //    }
   }
 
-  def eventIsItDone(): Boolean = {
-    pipeEvent.events.get.current.get.eventDone(model)
-  }
+  // on regarde si l'event en cours est fini
+  def eventIsItDone(): Boolean = pipeEvent.events.get.currentEvents(pipeEvent.events.get.eventIndex).eventDone
 
   def model = _model
 
@@ -88,6 +81,8 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
     list.headOption
   }
 
+  // on regarde si c'est possible de faire cette action avec les keys apuuyaient
+  // un peu de view...
   def lifeAction(key: Int): Boolean = _model.stateGame match {
     case EVENT_DEPLACEMENT => listDeplacement.contains(key)
     case EVENT_DIALOGUE => listDialogue.contains(key)
@@ -96,4 +91,4 @@ class ControllerWarrior(_model: ModelWarrior) extends Controller(_model) {
     case _ => false
   }
 
-s}
+}

@@ -2,7 +2,7 @@ package controller.standard
 
 import controller.standard.fight.ControllerFight
 import controller.standard.resolver.Resolver
-import standard.model.event.StructEvent
+import standard.model.event.Events
 import standard.model.model.Model
 import standard.model.perso.job.Deplaceur
 import standard.resources.Variables
@@ -11,7 +11,7 @@ abstract class Controller(_model: Model) {
 
   def model: Model
 
-  val pipeEvent = new StructEvent
+  val pipeEvent = new Events{}
 
   def resolver: Resolver
 
