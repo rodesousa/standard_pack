@@ -18,9 +18,10 @@ object Variables {
   val EVENT_BEGIN_FIGHT = "event_begin_fight"
   val EVENT_BEGIN = "event_begin"
   val EVENT_NONE = "event_none"
+  val EVENT_DONE = "event_done"
   val EVENT_FIGHT_DONE = "event_fight_done"
 
-  val DEBUG = true
+  val DEBUG = false
 
   val listDeplacement = 37 :: 38 :: 39 :: 40 :: 10 :: Nil
   val listFight = 37 :: 38 :: 39 :: 40 :: 10 :: Nil

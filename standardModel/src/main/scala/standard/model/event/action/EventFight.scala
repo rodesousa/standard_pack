@@ -11,5 +11,6 @@ trait EventFight extends EventAction {
   def eventDone(fighter: FighterWarrior, eventOwner: FighterWarrior): Boolean = {
     fighter.die || eventOwner.die
   }
+  override def toString : String = "Event Fight"
 
 }
