@@ -21,7 +21,10 @@ class ListenerWarrior(view: ViewWarrior) extends Listener(view) {
           case KeyEvent.VK_RIGHT | KeyEvent.VK_LEFT | KeyEvent.VK_UP | KeyEvent.VK_DOWN =>
             view.controller.move(e.getKeyCode.toString, currentPerso)
           case KeyEvent.VK_ENTER =>
+            println(s"avant resolve - ${view.model.stateGame}")
             view.controller.resolveAll()
+            println(s"apres resolve - ${view.model.stateGame}")
+            println("-----------------------------------------")
             if (view.controller.model.stateGame == EVENT_BEGIN_FIGHT) {
               view.initFight()
               changeGametoFight()
@@ -35,8 +38,6 @@ class ListenerWarrior(view: ViewWarrior) extends Listener(view) {
       else
         view.panelGame.updateUI()
 
-      if (Variables.DEBUG)
-        println(s"Etat du jeu: ${view.controller.model.stateGame}")
     }
     else {
       // FIN D'UN COMBAT
