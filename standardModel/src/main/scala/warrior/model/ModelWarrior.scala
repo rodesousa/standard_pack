@@ -10,8 +10,9 @@ import warrior.perso.CharacterFighter
  */
 class ModelWarrior(var currentMap: MapWarrior, var currentPerso: CharacterFighter) extends Model(currentMap, currentPerso) {
   var modelFight: ModelFightWarrior = null
+  currentMap.init(this)
 
-  def etatMaps = null
+//  def etatMaps = null
 
   def etatCompagnons = null
 }

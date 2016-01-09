@@ -13,7 +13,7 @@ abstract class Model(_currentMap: Map, _currentPerso: Deplaceur) {
   var stateGame = Variables.EVENT_NONE
   var dialogue: Option[Dialogue] = None
 
-  def etatMaps: mutable.HashMap[String, Map]
+  //  def etatMaps: mutable.HashMap[String, Map]
 
   def etatCompagnons: mutable.HashMap[String, Personnage]
 
