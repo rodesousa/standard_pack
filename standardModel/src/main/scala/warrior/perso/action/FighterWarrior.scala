@@ -1,6 +1,6 @@
-package warrior.fight
+package warrior.perso.action
 
-import standard.model.fight.Fighter
+import standard.model.perso.action.Fighter
 import warrior.fight.technique.Technique
 import warrior.item.weapon.WarriorWeapon
 

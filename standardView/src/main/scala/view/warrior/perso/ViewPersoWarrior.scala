@@ -2,12 +2,12 @@ package view.warrior.perso
 
 import standard.model.model.Model
 import standard.resources.Variables._
-import warrior.perso.CharacterFighter
+import warrior.perso.job.CharacterFighterWarrior
 
 /**
  * * Created by rds on 07/05/15.
  */
-class ViewPersoWarrior(_perso: CharacterFighter) {
+class ViewPersoWarrior(_perso: CharacterFighterWarrior) {
   val faceImg1 = _perso.info.folder + "face1.jpg"
   val faceImg2 = _perso.info.folder + "face2.jpg"
   val faceImg3 = _perso.info.folder + "face3.jpg"

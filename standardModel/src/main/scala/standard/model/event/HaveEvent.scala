@@ -5,10 +5,10 @@ package standard.model.event
  */
 abstract class HaveEvent {
 
-  def listEvents: List[List[EventAction]]
-
   // indice de event dans currentEvents
   var eventIndex = 0
+
+  def listEvents: List[List[EventAction]]
 
   // la suite d'events en cours dans listEvents
   def currentEvents: List[EventAction]

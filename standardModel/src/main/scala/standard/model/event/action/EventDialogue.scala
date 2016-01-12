@@ -7,11 +7,11 @@ import standard.resources.Variables
  * * Created by rds on 16/05/15.
  */
 trait EventDialogue extends EventAction {
+  val possiblesTouch = Variables.listDialogue
+
   def text: String
 
   def subject: String
-
-  val possiblesTouch = Variables.listDialogue
 
   override def toString: String = "Event Dialogue"
 }

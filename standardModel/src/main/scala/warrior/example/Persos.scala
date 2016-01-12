@@ -1,6 +1,6 @@
 package warrior.example
 
-import standard.model.perso.job.{Pnj, PnjFighter}
+import standard.model.perso.job.Pnj
 import standard.resources.Variables
 import standard.resources.Variables._
 import warrior.fight.technique.Dan
@@ -9,14 +9,14 @@ import warrior.item.weapon.WarriorWeapon
 import warrior.item.weapon.axe.AxeStandard
 import warrior.item.weapon.rod.RodStandard
 import warrior.item.weapon.sword.SwordStandard
-import warrior.perso.CharacterFighter
+import warrior.perso.job.{CharacterFighterWarrior, PnjFighterWarrior}
 
 /**
  * * Created by rds on 21/05/15.
  */
 object Persos {
 
-  val noName = new PnjFighter(Variables.NOTIMPLE) {
+  val noName = new PnjFighterWarrior(Variables.NOTIMPLE) {
     // STAT
     var str = 50
     var vit = 50
@@ -43,7 +43,7 @@ object Persos {
   val compteur = new Pnj(Variables.NOTIMPLE) {
   }
 
-  val romulus = new PnjFighter(Variables.NOTIMPLE) {
+  val romulus = new PnjFighterWarrior(Variables.NOTIMPLE) {
     var str = 3
     var vit = 50
     var hpMax = 10
@@ -56,7 +56,7 @@ object Persos {
     var listTechnique = spearMercenary :: Nil
   }
 
-  val remus = new PnjFighter(Variables.NOTIMPLE) {
+  val remus = new PnjFighterWarrior(Variables.NOTIMPLE) {
     var str = 3
     var vit = 50
     var hpMax = 10
@@ -94,7 +94,7 @@ object Persos {
   //
   def createPersoPri = {
 
-    new CharacterFighter(PERSONNAGE_NAME) {
+    new CharacterFighterWarrior(PERSONNAGE_NAME) {
       info.name = "Kenshin"
       var str = 10
       var defe = 10

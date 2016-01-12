@@ -1,12 +1,14 @@
 package editor.model.perso
 
-import editor.model.perso.job.DeplaceurEditor
-import standard.model.fight.Fighter
+import editor.model.perso.action.MoveEditor
+import standard.model.perso.job.Personnage
 
 /**
  * Created by rodesousa on 20/10/15.
  */
 
-abstract class PersoEditor(_nomFichier: String) extends DeplaceurEditor(_nomFichier) with Fighter {
+//todo
+// elle sert ??
+abstract class PersoEditor(_nomFichier: String) extends Personnage(_nomFichier) with MoveEditor {
 
 }

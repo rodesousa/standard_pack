@@ -1,8 +1,8 @@
 package warrior.fight.technique.impl
 
 import warrior.fight.technique.action.Atack
-import warrior.fight.technique.{Dan, Technique}
 import warrior.fight.technique.style.SwordStyle
+import warrior.fight.technique.{Dan, Technique}
 import warrior.item.weapon.WarriorWeapon
 import warrior.item.weapon.axe.Axe
 

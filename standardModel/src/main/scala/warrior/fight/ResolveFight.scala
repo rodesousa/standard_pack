@@ -3,14 +3,14 @@ package warrior.fight
 import standard.resources.Variables._
 import warrior.fight.technique.action.ActionFight
 import warrior.model.ModelWarrior
-import warrior.perso.CharacterFighter
+import warrior.perso.job.CharacterFighterWarrior
 
 /**
  * * Created by rds on 11/05/15.
  */
 object ResolveFight {
 
-  def fight(atacker: CharacterFighter, defenser: CharacterFighter,
+  def fight(atacker: CharacterFighterWarrior, defenser: CharacterFighterWarrior,
             model: ModelWarrior, action: ActionFight) {
     val maxRange = 0
 

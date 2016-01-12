@@ -1,4 +1,4 @@
-package standard.model.fight
+package standard.model.perso.action
 
 import standard.model.item.weapon.Weapon
 import standard.model.stat.{StatCombat, StatHp}
@@ -9,7 +9,7 @@ import warrior.fight.technique.action.ActionFight
  */
 trait Fighter extends StatCombat with StatHp {
 
-   def arme: Weapon
+  def arme: Weapon
 
   def atack(actionFight: ActionFight): Int = {
     //TODO Satisfaisant pour l'instant

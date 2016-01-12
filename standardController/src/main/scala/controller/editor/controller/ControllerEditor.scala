@@ -12,11 +12,11 @@ class ControllerEditor(_model: ModelEditor) extends Controller(_model) {
   val controllerFight = new ControllerFight {}
   val resolver = new Resolver {}
 
-  def model = _model
-
   def printXY() = {
     println(s"${model.currentPerso.x} ${model.currentPerso.y}")
   }
+
+  def model = _model
 
   def writeZoneWalking() = {
     if (!model.mutableZoneWalking.contains((model.currentPerso.x, model.currentPerso.y)))
@@ -30,7 +30,7 @@ class ControllerEditor(_model: ModelEditor) extends Controller(_model) {
   def removeZoneWalking(direction: String) {
     def x = model.currentPerso.x
     def y = model.currentPerso.y
-    def pas = model.currentPerso.pas
+    def pas = model.currentPerso.info.nbrPas
     direction match {
       case Variables.DIRECTION_LEFT =>
         if (model.mutableZoneWalking.contains((x + (pas * -1), y))) {

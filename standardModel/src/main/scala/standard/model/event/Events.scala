@@ -6,7 +6,11 @@ package standard.model.event
 trait Events {
   var events: Option[HaveEvent] = None
 
-  def eventAction = events.get.currentEvents(events.get.eventIndex)
+  def nextEvent: Unit = {
+    if (eventAction.eventDone) {
+      events.get.eventIndex += 1
+    }
+  }
 
   // si il existe un next event alors il devient current
   // si next de next existe alors il devient current de next
@@ -20,10 +24,6 @@ trait Events {
   //    }
   //  }
 
-  def nextEvent: Unit = {
-    if (eventAction.eventDone) {
-      events.get.eventIndex += 1
-    }
-  }
+  def eventAction = events.get.currentEvents(events.get.eventIndex)
 
 }

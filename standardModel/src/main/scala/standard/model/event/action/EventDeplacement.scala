@@ -7,10 +7,12 @@ import standard.resources.Variables
 /**
  * Created by rodesousa on 29/10/15.
  */
-trait EventDeplacement extends EventAction{
+trait EventDeplacement extends EventAction {
 
-  def eventDone(model : Model) = true
   val list = Variables.listDeplacement
-  override def toString : String = "Event Deplacement"
+
+  def eventDone(model: Model) = true
+
+  override def toString: String = "Event Deplacement"
 
 }

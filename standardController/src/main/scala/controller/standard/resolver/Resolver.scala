@@ -2,7 +2,7 @@ package controller.standard.resolver
 
 import controller.standard.Controller
 import standard.model.dialogue.Dialogue
-import standard.model.event.action.{EventDone, EventDialogue, EventFight}
+import standard.model.event.action.{EventDialogue, EventFight}
 import standard.resources.Variables._
 
 

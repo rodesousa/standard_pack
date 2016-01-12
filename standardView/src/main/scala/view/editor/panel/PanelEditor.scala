@@ -5,7 +5,6 @@ import java.io.File
 import javax.imageio.ImageIO
 import javax.swing.JPanel
 
-import controller.editor.controller.ControllerEditor
 import editor.model.ModelEditor
 import view.standard.perso.ViewPerso
 

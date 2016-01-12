@@ -9,7 +9,7 @@ trait EventFightDone extends EventAction {
 
   def eventDone(): Boolean = true
 
-  override def toString : String = "Event Fight Done"
+  override def toString: String = "Event Fight Done"
 
 }
 

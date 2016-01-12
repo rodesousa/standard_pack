@@ -1,9 +1,9 @@
 package warrior.map.map1
 
 import standard.model.event.action.EventDialogue
-import standard.model.job.SellerJob
 import standard.model.map.cellule.Cellule
-import standard.model.perso.job.{Pnj, PnjFighter}
+import standard.model.perso.corps.Seller
+import standard.model.perso.job.Pnj
 import standard.resources.Variables
 import warrior.example.Persos
 import warrior.fight.technique.impl.{AxeMercenary, SpearMercenary, SwordMercenary}
@@ -14,6 +14,7 @@ import warrior.item.weapon.sword.SwordStandard
 import warrior.makeEvent.MakeEvent
 import warrior.map.MapWarrior
 import warrior.model.ModelWarrior
+import warrior.perso.job.PnjFighterWarrior
 
 /**
  * * Created by rds on 22/05/15.
@@ -22,8 +23,86 @@ object Map1 extends MapWarrior(Variables.MAP_NAME) {
   //TODO Retravailler la class
 
 
-  def newDialogue(subject: String, text: String): EventDialogue = {
-    MakeEvent.makeDialogue(subject, text)
+  // CAMP1
+  val characterCamp1 = new PnjFighterWarrior(Variables.NOTIMPLE) {
+    var str = 3
+    var vit = 50
+    var hpMax = 10
+    var agi = 3
+    var defe = 2
+    val arme: WarriorWeapon = new AxeStandard
+    val axeMercenary = new AxeMercenary {
+      val listAtk = base :: Nil
+    }
+    var listTechnique = axeMercenary :: Nil
+  }
+  //CAMP2
+  val characterCamp2 = new PnjFighterWarrior(Variables.NOTIMPLE) {
+    var str = 3
+    var vit = 50
+    var hpMax = 10
+    var agi = 3
+    var defe = 2
+    val arme: WarriorWeapon = new SpearStandard
+    val spearMercenary = new SpearMercenary {
+      val listAtk = base :: Nil
+    }
+    var listTechnique = spearMercenary :: Nil
+  }
+
+
+  // // //
+  // Perso
+  // // //
+  val characterCamp3 = new PnjFighterWarrior(Variables.NOTIMPLE) {
+    var str = 3
+    var vit = 50
+    var hpMax = 10
+    var agi = 3
+    var defe = 2
+    val arme: WarriorWeapon = new SwordStandard
+    val swordMercenary = new SwordMercenary {
+      val listAtk = base :: Nil
+    }
+    var listTechnique = swordMercenary :: Nil
+  }
+  val characterCamp4 = new Pnj(Variables.NOTIMPLE) {
+  }
+  val characterCamp5 = new Pnj(Variables.NOTIMPLE) {
+  }
+  val characterFighter1 = new PnjFighterWarrior(Variables.NOTIMPLE) {
+    var str = 3
+    var vit = 50
+    var hpMax = 10
+    var agi = 3
+    var defe = 2
+    val arme: WarriorWeapon = new SpearStandard
+    val spearMercenary = new SpearMercenary {
+      val listAtk = base :: Nil
+    }
+    var listTechnique = spearMercenary :: Nil
+  }
+  val characterFighter2 = new PnjFighterWarrior(Variables.NOTIMPLE) {
+    var str = 3
+    var vit = 50
+    var hpMax = 10
+    var agi = 3
+    var defe = 2
+    val arme: WarriorWeapon = new SwordStandard
+    val swordMercenary = new SwordMercenary {
+      val listAtk = base :: Nil
+    }
+    var listTechnique = swordMercenary :: Nil
+  }
+  val characterMerchant = new Pnj(Variables.NOTIMPLE) {
+  }
+  val marchandDeplca = new Seller(characterMerchant, Nil) {
+  }
+  val lambda1 = new Pnj(Variables.NOTIMPLE) {
+  }
+  val lambda2 = new Pnj(Variables.NOTIMPLE) {
+  }
+  val lambda3 = new Pnj(Variables.NOTIMPLE) {
   }
 
   def init(model: ModelWarrior) {
@@ -95,97 +174,8 @@ object Map1 extends MapWarrior(Variables.MAP_NAME) {
     MakeEvent.initEvent(haveEventCamp11, lambda1, new Cellule(360, 45), model)
   }
 
-
-  // // //
-  // Perso
-  // // //
-
-  // CAMP1
-  val characterCamp1 = new PnjFighter(Variables.NOTIMPLE) {
-    var str = 3
-    var vit = 50
-    var hpMax = 10
-    var agi = 3
-    var defe = 2
-    val arme: WarriorWeapon = new AxeStandard
-    val axeMercenary = new AxeMercenary {
-      val listAtk = base :: Nil
-    }
-    var listTechnique = axeMercenary :: Nil
-  }
-
-  //CAMP2
-  val characterCamp2 = new PnjFighter(Variables.NOTIMPLE) {
-    var str = 3
-    var vit = 50
-    var hpMax = 10
-    var agi = 3
-    var defe = 2
-    val arme: WarriorWeapon = new SpearStandard
-    val spearMercenary = new SpearMercenary {
-      val listAtk = base :: Nil
-    }
-    var listTechnique = spearMercenary :: Nil
-  }
-
-  val characterCamp3 = new PnjFighter(Variables.NOTIMPLE) {
-    var str = 3
-    var vit = 50
-    var hpMax = 10
-    var agi = 3
-    var defe = 2
-    val arme: WarriorWeapon = new SwordStandard
-    val swordMercenary = new SwordMercenary {
-      val listAtk = base :: Nil
-    }
-    var listTechnique = swordMercenary :: Nil
-  }
-
-  val characterCamp4 = new Pnj(Variables.NOTIMPLE) {
-  }
-
-  val characterCamp5 = new Pnj(Variables.NOTIMPLE) {
-  }
-
-  val characterFighter1 = new PnjFighter(Variables.NOTIMPLE) {
-    var str = 3
-    var vit = 50
-    var hpMax = 10
-    var agi = 3
-    var defe = 2
-    val arme: WarriorWeapon = new SpearStandard
-    val spearMercenary = new SpearMercenary {
-      val listAtk = base :: Nil
-    }
-    var listTechnique = spearMercenary :: Nil
-  }
-
-  val characterFighter2 = new PnjFighter(Variables.NOTIMPLE) {
-    var str = 3
-    var vit = 50
-    var hpMax = 10
-    var agi = 3
-    var defe = 2
-    val arme: WarriorWeapon = new SwordStandard
-    val swordMercenary = new SwordMercenary {
-      val listAtk = base :: Nil
-    }
-    var listTechnique = swordMercenary :: Nil
-  }
-
-  val characterMerchant = new Pnj(Variables.NOTIMPLE) {
-  }
-
-  val marchandDeplca = new SellerJob(characterMerchant, Nil) {
-  }
-
-  val lambda1 = new Pnj(Variables.NOTIMPLE) {
-  }
-
-  val lambda2 = new Pnj(Variables.NOTIMPLE) {
-  }
-
-  val lambda3 = new Pnj(Variables.NOTIMPLE) {
+  def newDialogue(subject: String, text: String): EventDialogue = {
+    MakeEvent.makeDialogue(subject, text)
   }
 
 

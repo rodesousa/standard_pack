@@ -1,13 +1,14 @@
 package view.standard.perso
 
 import standard.model.model.Model
-import standard.model.perso.job.Deplaceur
+import standard.model.perso.action.Move
+import standard.model.perso.job.Personnage
 import standard.resources.Variables._
 
 /**
  * Created by rodesousa on 20/10/15.
  */
-class ViewPerso(_perso: Deplaceur) {
+class ViewPerso(_perso: Personnage with Move) {
   val faceImg1 = _perso.info.folder + "face1.jpg"
   val faceImg2 = _perso.info.folder + "face2.jpg"
   val faceImg3 = _perso.info.folder + "face3.jpg"

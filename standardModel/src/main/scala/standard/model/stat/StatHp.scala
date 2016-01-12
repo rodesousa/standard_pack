@@ -5,11 +5,11 @@ package standard.model.stat
  */
 trait StatHp {
 
+  var hpCurrent = 0
+
   def vit: Int
 
   def hpMax: Int
-
-  var hpCurrent = 0
 
   def die: Boolean = hpCurrent <= 0
 }

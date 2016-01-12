@@ -14,7 +14,7 @@ class Listener(view: View) extends KeyListener with MouseListener {
   def keyPressed(e: KeyEvent) {
     if (e.getKeyCode == KeyEvent.VK_RIGHT || e.getKeyCode == KeyEvent.VK_LEFT ||
       e.getKeyCode == KeyEvent.VK_UP || e.getKeyCode == KeyEvent.VK_DOWN) {
-      view.model.currentPerso canDo(view.model, e.getKeyCode.toString)
+      view.model.currentPerso canDo(view.model, e.getKeyCode.toString, view.model.currentPerso.info.nbrPas)
     }
     else if (e.getKeyCode == KeyEvent.VK_W) {
     }
